@@ -16,6 +16,5 @@ gulp.task('css', () => {
 });
 
 gulp.task('cssDev', () => {
-  log('Starting watch less files...');
   return gulp.watch(['./index.less'], ['css']);
 });

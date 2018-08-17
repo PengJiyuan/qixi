@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="./index.css" rel="stylesheet" />
+  <title>Qixi</title>
+</head>
+<body>
+  <div class="inner">
+    <div class="title">Yuan ❤ Tian</div>
+    <div class="p">相恋于 2017/06/24/21:30</div>
+    <br>
+    <div>
+      <img src="./love.png" />
+    </div>
+    <br>
+    <div class="p pink">已携手走过</div>
+    <div id="lovetime" class="p"></div>
+    <br>
+    <div class="p pink">距离百年好合还剩</div>
+    <div id="_100year" class="p"></div>
+    <div class="p" style="font-size: 30px;">❤</div>
+  </div>
+</body>
+<script>  
+  var _ordertimer = null;
+  var date = new Date();
+  var _start = new Date('2017-06-24 21:30');
+  var _100year = new Date('2117-06-24 21:30');
+  var loveEle = document.getElementById("lovetime");
+  var leftEle = document.getElementById("_100year");
+
+  function timer() {
+    var now = new Date();
+    // 100年倒计时
+    var leftTime = _100year - now;
+    // 相爱时间
+    var loveTime = now - _start;
+    var loveMeta = getMetadata(loveTime);
+    var leftMeta = getMetadata(leftTime);
+    loveEle.innerHTML = loveMeta.day + " 天 " + loveMeta.hour + " 小时 " + loveMeta.minute + " 分 " + loveMeta.second + " 秒";
+    leftEle.innerHTML = leftMeta.day + " 天 " + leftMeta.hour + " 小时 " + leftMeta.minute + " 分 " + leftMeta.second + " 秒";
+  }
+
+  function getMetadata(time) {
+    return {
+      day: checkTime(parseInt(time / 1000 / 60 / 60 / 24, 10)),
+      hour: checkTime(parseInt(time / 1000 / 60 / 60 % 24, 10)),
+      minute: checkTime(parseInt(time / 1000 / 60 % 60, 10)),
+      second: checkTime(parseInt(time / 1000 % 60, 10))
+    };
+  }
+
+  function checkTime(i) { //将0-9的数字前面加上0，例1变为01
+    if (i < 10) {
+      i = "0" + i;
+    }
+    return i;
+  }
+
+  timer();
+  setInterval(timer, 1000);
+</script>
+<script src="https://unpkg.com/particle-bg/lib/particle-bg.umd.min.js"></script>
+<script>
+  particleBg('body', {
+    line: false,
+    count: 150
+  });
+</script>
+</html>
